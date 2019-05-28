@@ -1,0 +1,86 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom|center_horizontal">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/dialog"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="20dp"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:visibility="invisible"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="3dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/add_shape" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end">
+
+                <EditText
+                    android:id="@+id/etPlayListId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="3"
+                    android:hint="Введите id плейлиста"
+                    android:textSize="15sp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_next"
+                    app:fabSize="mini" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pg_loading_indicator"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="end|center_vertical"
+                android:indeterminateTint="@color/white"
+                android:indeterminateTintMode="src_in"
+                android:visibility="invisible" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/fabCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            android:background="@color/white"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                android:src="@drawable/ic_add"
+                app:fabSize="normal" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</FrameLayout>

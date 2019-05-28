@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Start Android</string>
+    <string name="player_error">Error initializing YouTube player: %s</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="tv_logo_trans">tvLogoTrans</string>
+    <string name="toolbar_trans">toolbarTrans</string>
+    <string name="start_android">Start Android</string>
+</resources>

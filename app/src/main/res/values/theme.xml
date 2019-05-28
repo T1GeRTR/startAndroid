@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="Theme.FirstActivity" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowActivityTransitions">true</item>
+</style>
+
+<style name="Theme.SecondActivity" parent="Theme.AppCompat.Light.NoActionBar">
+<item name="android:windowActivityTransitions">true</item>
+
+<item name="android:windowSharedElementEnterTransition">
+    @transition/toolbar_transition
+</item>
+
+<item name="android:windowSharedElementExitTransition">
+    @transition/toolbar_transition
+</item>
+</style>
+</resources>
