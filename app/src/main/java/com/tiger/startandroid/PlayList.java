@@ -11,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -234,13 +233,28 @@ public class PlayList extends Activity implements View.OnClickListener {
                 // Если выбран дочерний элемент
                 boolean isChild = ExpandableListView.getPackedPositionType(info.packedPosition) == ExpandableListView.PACKED_POSITION_TYPE_CHILD;
                 String tableName;
-                int group = ExpandableListView.getPackedPositionGroup(info.packedPosition) + 1;
+                int group = ExpandableListView.getPackedPositionGroup(info.packedPosition);
                 String toastText;
+                String whereCondition = null;
+                int deleteGroup = 0;
                 if (isChild){
-                    String whereCondition = "channelId = " + group;
+                    // Вычисление к какой группе относится видео
+                    Cursor cursorGroup = mDb.rawQuery("SELECT * FROM otherChannels", null);
+                    int groupCount = 0;
+                    while (!cursorGroup.isAfterLast()){
+                        if (groupCount == group + 1){
+                            deleteGroup = cursorGroup.getInt(cursorGroup.getColumnIndex("_id"));
+                            break;
+                        }else {
+                            groupCount += 1;
+                            cursorGroup.moveToNext();
+                        }
+                    }
+                    whereCondition = "channelId = " + deleteGroup;
                     cursor = mDb.rawQuery("SELECT * FROM otherLessons WHERE " + whereCondition + " ORDER BY _id", null);
                     tableName = "otherLessons";
                     toastText = "Урок удален";
+                    cursorGroup.close();
                 }else {
                     cursor = mDb.rawQuery("SELECT * FROM otherChannels", null);
                     tableName = "otherChannels";
@@ -259,6 +273,11 @@ public class PlayList extends Activity implements View.OnClickListener {
                                 ContentValues cv = new ContentValues();
                                 cv.put("changeSubj", 1);
                                 mDb.update("otherLessons", cv, "_id = " + lastVideo, null);
+                            }
+                            // Если выбрано единственное видео, нужно удалить и группу тоже
+                            if (cursor.getCount() == 2){
+                                mDb.delete("otherLessons", whereCondition, null);
+                                mDb.delete("otherChannels", "_id = " + deleteGroup, null);
                             }
                             // Если был выбран родительский элемент, нужно удалить также и список видео
                         }else {
